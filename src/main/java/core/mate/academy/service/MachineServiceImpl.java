@@ -14,11 +14,11 @@ public class MachineServiceImpl implements MachineService<Machine> {
     public List<Machine> getAll(Class<? extends Machine> type) {
         List<? extends Machine> machines;
         if (type == Bulldozer.class) {
-            machines = new BulldozerProducer().get();
+            machines = new BulldozerProducerImpl().get();
         } else if (type == Excavator.class) {
-            machines = new ExcavatorProducer().get();
+            machines = new ExcavatorProducerImpl().get();
         } else if (type == Truck.class) {
-            machines = new TruckProducer().get();
+            machines = new TruckProducerImpl().get();
         } else {
             return List.of();
         }
