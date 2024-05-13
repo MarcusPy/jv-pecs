@@ -12,9 +12,34 @@ public class Excavator extends Machine {
     public Excavator() {
     }
 
-    public Excavator(String brand, String model, int horsePower) {
+    public Excavator(String name, String color, String brand, String model, int horsePower) {
+        super();
         this.brand = brand;
         this.model = model;
+        this.horsePower = horsePower;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public int getHorsePower() {
+        return horsePower;
+    }
+
+    public void setHorsePower(int horsePower) {
         this.horsePower = horsePower;
     }
 
