@@ -4,6 +4,8 @@ import core.mate.academy.model.Bulldozer;
 import core.mate.academy.model.Excavator;
 import core.mate.academy.model.Machine;
 import core.mate.academy.model.Truck;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -12,37 +14,28 @@ import java.util.List;
 public class MachineServiceImpl implements MachineService<Machine> {
     @Override
     public List<Machine> getAll(Class<? extends Machine> type) {
-        List<? extends Machine> machines;
-        if (type == Bulldozer.class) {
-            machines = new BulldozerProducerImpl().get();
-        } else if (type == Excavator.class) {
-            machines = new ExcavatorProducerImpl().get();
-        } else if (type == Truck.class) {
-            machines = new TruckProducerImpl().get();
+        List<Machine> machines = new ArrayList<>();
+        if (type.equals(Bulldozer.class)) {
+            machines.addAll(new BulldozerProducerImpl().get());
+        } else if (type.equals(Excavator.class)) {
+            machines.addAll(new ExcavatorProducerImpl().get());
+        } else if (type.equals(Truck.class)) {
+            machines.addAll(new TruckProducerImpl().get());
         } else {
-            return List.of();
+            return Collections.emptyList();
         }
-
-        return (List<Machine>) machines;
+        return machines;
     }
 
     @Override
-    public <T> void fill(List<T> machines, T value) {
-        for (int i = 0; i < machines.size(); i++) {
-            machines.set(i, value);
-        }
+    public void fill(List<? super Machine> machines, Machine value) {
+        Collections.fill(machines, value);
     }
 
     @Override
     public void startWorking(List<? extends Machine> machines) {
         for (Machine machine : machines) {
-            if (machine instanceof Bulldozer bulldozer) {
-                bulldozer.doWork();
-            } else if (machine instanceof Excavator excavator) {
-                excavator.doWork();
-            } else if (machine instanceof Truck truck) {
-                truck.doWork();
-            }
+            machine.doWork();
         }
     }
 }
