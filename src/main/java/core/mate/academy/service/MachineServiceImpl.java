@@ -9,17 +9,21 @@ import java.util.List;
  * Your implementation of MachineService.
  */
 public class MachineServiceImpl implements MachineService<Machine> {
+    private static final String BULLDOZER = "Bulldozer";
+    private static final String EXCAVATOR = "Excavator";
+    private static final String TRUCK = "Truck";
+
     @Override
     public List<Machine> getAll(Class<? extends Machine> type) {
         List<Machine> machines = new ArrayList<>();
         switch (type.getSimpleName()) {
-            case "Bulldozer":
+            case BULLDOZER:
                 machines.addAll(new BulldozerProducerImpl().get());
                 break;
-            case "Excavator":
+            case EXCAVATOR:
                 machines.addAll(new ExcavatorProducerImpl().get());
                 break;
-            case "Truck":
+            case TRUCK:
                 machines.addAll(new TruckProducerImpl().get());
                 break;
             default:
